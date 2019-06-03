@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  webapp:
+    hostname: webapp
+    build:
+      context: .
+      dockerfile: services/webapp/Dockerfile
+    ports:
+      - 8000:80  # host 8000 -> nginx port 80
+    environment:
+      DEBUG: "True"
+    volumes:
+      - ./project/:/project/

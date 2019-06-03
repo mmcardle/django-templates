@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  webapp:
+    hostname: webapp
+    build:
+      context: .
+      dockerfile: services/webapp/Dockerfile
+    ports:
+      - 8000:80  # host 8000 -> nginx port 80
+    environment:
+      DEBUG: "True"
+      DATABASE_URL: 'psql://postgres:mysecretpassword@postgres:5432/postgres'
+      CACHE_URL: redis://redis:6379/0
+    volumes:
+      - ./project/:/project/
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:5.0.4
+    ports:
+      - "6379:6379"
+    volumes:
+      - /data
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
