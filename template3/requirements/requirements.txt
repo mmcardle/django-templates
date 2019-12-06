@@ -1,5 +1,5 @@
-Django==2.2.8
+Django==3.0.0
 uwsgi
 psycopg2-binary
 django-environ
-django-redis
+https://github.com/niwinz/django-redis/archive/master.zip # a version django-redis that supports django 3+ is not yet on pypi
